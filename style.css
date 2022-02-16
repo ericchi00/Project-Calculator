@@ -1,0 +1,50 @@
+body {
+    display: flex;
+    height: 95vh;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgray;
+}
+
+.calculatorContainer {
+    border: 3px solid black;
+    height: 350px;
+    width: 300px;
+    gap: 2px;
+}
+
+button {
+    color: white;
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+}
+
+#one, #two, #three, #four, 
+#five, #six, #seven, #eight,
+#nine, #zero, #decimal {
+    background-color: #D4D4D2;
+}
+
+#clear, #plusMinus, #percentage {
+    background-color: #1C1C1C;
+}
+
+#divide, #multiply, #minus,
+#plus, #equals {
+    background-color: #FF9500;
+}
+
+footer {
+    position: fixed;
+    height: 50px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+    text-align: center;
+}
+
+p {
+    margin: 0;
+}
