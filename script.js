@@ -1,99 +1,144 @@
-let value = 0;
+let value1 = '';
+let value2 = '';
+let operatorSign = '';
 
-function add(num) {
-    return value + num;
+function add(a, b) {
+    return a + b;
 }
 
-function subtract(num) {
-    return value - num;
+function subtract(a, b) {
+    return a - b;
 }
 
-function multiply(num) {
-    return value * num;
+function multiply(a, b) {
+    return a * b;
 }
 
-function divide(num) {
-    return value / num;
-}
-
-function operate(operator) {
-    if (operator === '+') {
-        add(value);
+function divide(a, b) {
+    if (b === '0') {
+        displayText.textContent = 'You will crash my calculator.';
     }
-    if (operator === '-') {
-        subtract(num);
-    }
-    if (operator === '*') {
-        multiply(num);
-    }
-    if (operator === '/') {
-        divide(num);
+    return a / b;
+}
+
+function operate(operator, a, b) {
+   switch (operator) {
+    case '/':
+        return divide(a, b);
+    case '*':
+        return multiply(a, b);
+    case '-':
+        return subtract(a, b);
+    case '+':
+        return add(a, b);
+   }
+}
+
+function equals() {
+    let result = operate(operatorSign, +value1, +value2);
+    displayText.textContent = result;
+    operatorSign = '';
+    value1 = result;
+    value2 = '';
+}
+
+//checks value to decide where to assign the number
+function valueChecker(num) {
+    if (operatorSign === '') {
+        value1 += num;
+        displayText.textContent = value1;
+    } else if (operatorSign.length > 0) {
+        value2 += num;
+        displayText.textContent = value2;
     }
 }
+
 //sets display back to 0
 function reset() {
-    displayText.textContent = 0;
+    displayText.textContent = defaultText;
+    value1 = '';
+    value2 = '';
+    operatorSign = '';
 }
-const displayText = document.querySelector('#display');
 
+const displayText = document.querySelector('#display');
+const defaultText = displayText.textContent;
+
+const equalsButton = document.querySelector('#equals');
+equalsButton.addEventListener('click', () => {
+    equals();
+});
+
+//reset button
 const clearButton = document.querySelector('#clear');
 clearButton.addEventListener('click', () => {
     reset();
 });
-
 const plusMinusButton = document.querySelector('#plusMinus');
 plusMinusButton.addEventListener('click', () => {
-    value *= -1;
-    displayText.textContent += value;
+    if (value1 > 0) {
+        value1 *= -1;
+        displayText.textContent = value1;
+    }
+    value2 *= -1;
 });
 const percentageButton = document.querySelector('#percentage');
-const sevenButton = document.querySelector('#seven');
-sevenButton.addEventListener('click', () => {
-    value += 7;
-    displayText.textContent = value;
-});
-const eightButton = document.querySelector('#eight');
-eightButton.addEventListener('click', () => {
-    displayText.textContent += '8';
-});
-const nineButton = document.querySelector('#nine');
-nineButton.addEventListener('click', () => {
-    displayText.textContent += '9';
-});
+
 const multiplyButton = document.querySelector('#multiply');
 multiplyButton.addEventListener('click', () => {
-    operate('*');
+    operatorSign = '*';
 });
-const fourButton = document.querySelector('#four');
-fourButton.addEventListener('click', () => {
-    displayText.textContent += '4';
+const minusButton = document.querySelector('#minus');
+minusButton.addEventListener('click', () => {
+    operatorSign = '-';
 });
-const fiveButton = document.querySelector('#five');
-fiveButton.addEventListener('click', () => {
-    displayText.textContent += '5';
+const plusButton = document.querySelector('#plus');
+plusButton.addEventListener('click', () => {
+    operatorSign = '+';
 });
-const sixButton = document.querySelector('#six');
-sixButton.addEventListener('click', () => {
-    displayText.textContent += '6';
+const divideButton = document.querySelector('#divide');
+divideButton.addEventListener('click', () => {
+    operatorSign = '/';
 });
-const minusButtom = document.querySelector('#minus');
+
+const zeroButton = document.querySelector('#zero');
+zeroButton.addEventListener('click', () => {
+    valueChecker(0);
+});
 const oneButton = document.querySelector('#one');
 oneButton.addEventListener('click', () => {
-    displayText.textContent += '1';
+    valueChecker(1);
 });
 const twoButton = document.querySelector('#two');
 twoButton.addEventListener('click', () => {
-    displayText.textContent += '2';
+    valueChecker(2);
 });
 const threeButton = document.querySelector('#three');
 threeButton.addEventListener('click', () => {
-    displayText.textContent += '3';
+    valueChecker(3);
 });
-const plusButton = document.querySelector('#plus');
-const zeroButton = document.querySelector('#zero');
-zeroButton.addEventListener('click', () => {
-    displayText.textContent += '0';
+const fourButton = document.querySelector('#four');
+fourButton.addEventListener('click', () => {
+    valueChecker(4);
 });
+const fiveButton = document.querySelector('#five');
+fiveButton.addEventListener('click', () => {
+    valueChecker(5);
+});
+const sixButton = document.querySelector('#six');
+sixButton.addEventListener('click', () => {
+    valueChecker(6);
+});
+const sevenButton = document.querySelector('#seven');
+sevenButton.addEventListener('click', () => {
+    valueChecker(7);
+});
+const eightButton = document.querySelector('#eight');
+eightButton.addEventListener('click', () => {
+    valueChecker(8);
+});
+const nineButton = document.querySelector('#nine');
+nineButton.addEventListener('click', () => {
+    valueChecker(9);
+}); 
 const decimalButton = document.querySelector('#decimal');
-const equalsButton = document.querySelector('#equals');
-
