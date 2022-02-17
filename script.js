@@ -15,8 +15,8 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    if (b === '0') {
-        displayText.textContent = 'You will crash my calculator.';
+    if (value2 === '0') {
+        return displayText.textContent = 'ERROR';
     }
     return a / b;
 }
@@ -34,12 +34,17 @@ function operate(operator, a, b) {
    }
 }
 
+
+//doesn't reset operatorSign so value1 keeps the old result so user can string operations together
 function equals() {
+    if (value1 === '' && value2 === '') {
+        displayText.textContent = defaultText;
+    } else {
     let result = operate(operatorSign, +value1, +value2);
     displayText.textContent = result;
-    operatorSign = '';
     value1 = result;
     value2 = '';
+    }
 }
 
 //checks value to decide where to assign the number
@@ -86,19 +91,35 @@ const percentageButton = document.querySelector('#percentage');
 
 const multiplyButton = document.querySelector('#multiply');
 multiplyButton.addEventListener('click', () => {
+    if (value2 === '') {
     operatorSign = '*';
+    } else if (operatorSign.length > 0) {
+    equals();
+    }
 });
 const minusButton = document.querySelector('#minus');
 minusButton.addEventListener('click', () => {
-    operatorSign = '-';
+    if (value2 === '') {
+        operatorSign = '-';
+        } else if (operatorSign.length > 0) {
+        equals();
+        }
 });
 const plusButton = document.querySelector('#plus');
 plusButton.addEventListener('click', () => {
-    operatorSign = '+';
+    if (value2 === '') {
+        operatorSign = '+';
+        } else if (operatorSign.length > 0) {
+        equals();
+        }
 });
 const divideButton = document.querySelector('#divide');
 divideButton.addEventListener('click', () => {
-    operatorSign = '/';
+    if (value2 === '') {
+        operatorSign = '/';
+        } else if (operatorSign.length > 0) {
+        equals();
+        }
 });
 
 const zeroButton = document.querySelector('#zero');
