@@ -44,6 +44,7 @@ function equals() {
     displayText.textContent = result;
     value1 = result;
     value2 = '';
+    decimalButton.disabled = false;
     }
 }
 
@@ -64,6 +65,7 @@ function reset() {
     value1 = '';
     value2 = '';
     operatorSign = '';
+    decimalButton.disabled = false;
 }
 
 const displayText = document.querySelector('#display');
@@ -96,6 +98,7 @@ multiplyButton.addEventListener('click', () => {
     } else if (operatorSign.length > 0) {
     equals();
     }
+    decimalButton.disabled = false;
 });
 const minusButton = document.querySelector('#minus');
 minusButton.addEventListener('click', () => {
@@ -104,6 +107,7 @@ minusButton.addEventListener('click', () => {
         } else if (operatorSign.length > 0) {
         equals();
         }
+    decimalButton.disabled = false;
 });
 const plusButton = document.querySelector('#plus');
 plusButton.addEventListener('click', () => {
@@ -112,6 +116,7 @@ plusButton.addEventListener('click', () => {
         } else if (operatorSign.length > 0) {
         equals();
         }
+    decimalButton.disabled = false;
 });
 const divideButton = document.querySelector('#divide');
 divideButton.addEventListener('click', () => {
@@ -120,6 +125,7 @@ divideButton.addEventListener('click', () => {
         } else if (operatorSign.length > 0) {
         equals();
         }
+    decimalButton.disabled = false;
 });
 
 const zeroButton = document.querySelector('#zero');
@@ -162,4 +168,26 @@ const nineButton = document.querySelector('#nine');
 nineButton.addEventListener('click', () => {
     valueChecker(9);
 }); 
+
+
+//operator buttons renable the decimal button
 const decimalButton = document.querySelector('#decimal');
+decimalButton.addEventListener('click', () => {
+    if (value1 === '') {
+        value1 +='0.';
+        displayText.textContent = value1;
+        decimalButton.disabled = true;
+    } else if (value2 === '' && value2.search('.') === -1 && operatorSign !== '') {
+        value2 += '0.';
+        displayText.textContent = value2;
+        decimalButton.disabled = true; 
+    } else if (value1.length > 0 && value1.includes('.') === false) {
+        value1 += '.';
+        displayText.textContent = value1;
+        decimalButton.disabled = true;
+    } else if (value2.length > 0 && value2.includes('.') === false) {
+        value2 += '.';
+        displayText.textContent = value2;
+        decimalButton.disabled = true;
+    }
+});
