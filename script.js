@@ -182,7 +182,6 @@ nineButton.addEventListener('click', () => {
     valueChecker(9);
 }); 
 
-
 //operator buttons renable the decimal button
 const decimalButton = document.querySelector('#decimal');
 decimalButton.addEventListener('click', () => {
@@ -203,4 +202,9 @@ decimalButton.addEventListener('click', () => {
         displayText.textContent = value2;
         decimalButton.disabled = true;
     }
+});
+
+window.addEventListener('keydown', function(e){
+    const key = document.querySelector(`button[data-key='${e.keyCode}']`);
+    key.click();
 });
