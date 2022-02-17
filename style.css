@@ -4,30 +4,59 @@ body {
     justify-content: center;
     align-items: center;
     background-color: lightgray;
+    font-family: Roboto;
 }
 
 .calculatorContainer {
-    border: 3px solid black;
-    height: 350px;
-    width: 300px;
-    gap: 2px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    height: 500px;
+    width: 400px;
+    background-color: #1C1C1C;
+    border-radius: 5px;
+}
+
+#display {
+    margin-left: auto;
+    margin-right: 5px;
+    color: white;
+    font-size: 70px;
+}
+
+.firstRow, .secondRow, .thirdRow,
+.fourthRow, .fifthRow {
+    display: flex;
+    flex: 1;
+}
+
+.fifthRow :first-child {
+    flex-basis: 50%;
+}
+
+.fifthRow :not(:first-child) {
+    flex-basis: 25%;
 }
 
 button {
+    flex: 1;
+    height: auto;
+    text-align: center;
     color: white;
-    width: 50px;
-    height: 50px;
     border: 1px solid black;
+    font-size: larger;
+    padding: 0;
 }
 
 #one, #two, #three, #four, 
 #five, #six, #seven, #eight,
 #nine, #zero, #decimal {
-    background-color: #D4D4D2;
+    background-color: #505050;
 }
 
 #clear, #plusMinus, #percentage {
-    background-color: #1C1C1C;
+    background-color: #D4D4D2;
+    color: black;
 }
 
 #divide, #multiply, #minus,
