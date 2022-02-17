@@ -37,11 +37,12 @@ function operate(operator, a, b) {
 
 //doesn't reset operatorSign so value1 keeps the old result so user can string operations together
 function equals() {
-    if (value1 === '' && value2 === '') {
-        displayText.textContent = defaultText;
+    if (operatorSign === '') {
+        displayText.textContent = value1;
     } else {
-    let result = operate(operatorSign, +value1, +value2);
-    displayText.textContent = result;
+    let result = Math.round(( operate(operatorSign, +value1, +value2) + Number.EPSILON) * 100) / 100;
+    let exponential = result.toExponential(3);
+    displayText.textContent = exponential;
     value1 = result;
     value2 = '';
     decimalButton.disabled = false;
@@ -50,14 +51,15 @@ function equals() {
 
 //checks value to decide where to assign the number
 function valueChecker(num) {
-    if (operatorSign === '') {
+    if (value1.length < 8) {
         value1 += num;
         displayText.textContent = value1;
-    } else if (operatorSign.length > 0) {
-        value2 += num;
-        displayText.textContent = value2;
-    }
+        } else if (operatorSign.length > 0 && value2.length < 8) {
+            value2 += num;
+            displayText.textContent = value2;
+        }
 }
+    
 
 //sets display back to 0
 function reset() {
@@ -86,10 +88,21 @@ plusMinusButton.addEventListener('click', () => {
     if (value1 > 0) {
         value1 *= -1;
         displayText.textContent = value1;
+    } else if (value2 > 0) {
+        value2 *= -1;
+        displayText.textContent = value2;
     }
-    value2 *= -1;
 });
 const percentageButton = document.querySelector('#percentage');
+percentageButton.addEventListener('click', () => {
+    if (value1 !== '') {
+        value1 /= 100;
+        displayText.textContent = value1;
+    } else if (value2 !== '') {
+        value2 /= 100;
+        displayText.textContent = value2;
+    }
+});
 
 const multiplyButton = document.querySelector('#multiply');
 multiplyButton.addEventListener('click', () => {
