@@ -49,6 +49,10 @@ button {
     padding: 0;
 }
 
+button:hover {
+    filter: brightness(85%);
+}
+
 #one, #two, #three, #four, 
 #five, #six, #seven, #eight,
 #nine, #zero, #decimal {
