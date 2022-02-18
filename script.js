@@ -56,14 +56,15 @@ function equals() {
     }
 }
 
-//checks value to decide where to assign the number
+//checks to see if operatorSign has been assigned to decide where to save number to
 function valueChecker(num) {
     if (value1.length < 8 && operatorSign === '') {
         value1 += num;
-        displayText.textContent = value1;
-        } else if (operatorSign.length > 0 && value2.length < 8) {
+        let string = value1.toString();
+        displayText.textContent = string;
+        } else if (operatorSign !== '' && value2.length < 8) {
             value2 += num;
-            displayText.textContent = value2;
+            displayText.textContent = value2.toString();
         }
 }
     
@@ -92,22 +93,46 @@ clearButton.addEventListener('click', () => {
 });
 const plusMinusButton = document.querySelector('#plusMinus');
 plusMinusButton.addEventListener('click', () => {
-    if (value1 > 0) {
-        value1 *= -1;
-        displayText.textContent = value1;
-    } else if (value2 > 0) {
-        value2 *= -1;
-        displayText.textContent = value2;
+    if (operatorSign === '') {
+        if (+value1 > 0) {
+            value1 *= -1;
+            displayText.textContent = value1;
+            value1 = value1.toString();
+        }
+    } else if (operatorSign !== '') {
+        if (+value2 > 0) {
+            value2 *= -1;
+            displayText.textContent = value2;
+            value2 = value2.toString();
+        }
     }
 });
 const percentageButton = document.querySelector('#percentage');
 percentageButton.addEventListener('click', () => {
-    if (value1 !== '') {
-        value1 /= 100;
-        displayText.textContent = value1;
-    } else if (value2 !== '') {
-        value2 /= 100;
-        displayText.textContent = value2;
+    if (operatorSign === '') {
+        if (value1 !== '') {
+            let percentageResult = value1 / 100;
+            value1 = percentageResult;
+            if (percentageResult.toString().length > 6) {
+                let exponential = percentageResult.toExponential(3);
+                value1 = exponential;
+                displayText.textContent = value1;
+            } else {
+                displayText.textContent = value1;
+            }
+    }
+ } else {
+        if (value2 !== '') {
+            let percentageResult = value2 / 100;
+            value2 = percentageResult;
+            if (percentageResult.toString().length > 6) {
+                let exponential = percentageResult.toExponential(3);
+                value2 = exponential;
+                displayText.textContent = value2;
+            } else {
+                displayText.textContent = value2;
+            }
+        }
     }
 });
 
