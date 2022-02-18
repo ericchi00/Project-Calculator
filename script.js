@@ -40,7 +40,7 @@ function equals() {
     if (operatorSign === '') {
         displayText.textContent = value1;
     }
-    let result = Math.round(( operate(operatorSign, +value1, +value2) + Number.EPSILON) * 100) / 100;
+    let result = operate(operatorSign, +value1, +value2);
     let resultString = result.toString();
     if (resultString.length >= 8) {
         let exponential = result.toExponential(3);
