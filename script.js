@@ -1,7 +1,7 @@
 let value1 = '';
 let value2 = '';
 let operatorSign = '';
-
+//if operatorSign is empty, assign values to value1 first and then value2 once operatorSign has been chosen
 function add(a, b) {
     return a + b;
 }
