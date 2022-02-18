@@ -39,19 +39,26 @@ function operate(operator, a, b) {
 function equals() {
     if (operatorSign === '') {
         displayText.textContent = value1;
-    } else {
+    }
     let result = Math.round(( operate(operatorSign, +value1, +value2) + Number.EPSILON) * 100) / 100;
-    let exponential = result.toExponential(3);
-    displayText.textContent = exponential;
-    value1 = result;
-    value2 = '';
-    decimalButton.disabled = false;
+    let resultString = result.toString();
+    if (resultString.length >= 8) {
+        let exponential = result.toExponential(3);
+        displayText.textContent = exponential;
+        value1 = result;
+        value2 = '';
+        decimalButton.disabled = false;
+    } else if (resultString.length < 8) {
+        displayText.textContent = result;
+        value1 = result;
+        value2 = '';
+        decimalButton.disabled = false;
     }
 }
 
 //checks value to decide where to assign the number
 function valueChecker(num) {
-    if (value1.length < 8) {
+    if (value1.length < 8 && operatorSign === '') {
         value1 += num;
         displayText.textContent = value1;
         } else if (operatorSign.length > 0 && value2.length < 8) {
@@ -202,9 +209,4 @@ decimalButton.addEventListener('click', () => {
         displayText.textContent = value2;
         decimalButton.disabled = true;
     }
-});
-
-window.addEventListener('keydown', function(e){
-    const key = document.querySelector(`button[data-key='${e.keyCode}']`);
-    key.click();
 });
